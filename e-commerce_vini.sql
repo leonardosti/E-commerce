@@ -29,7 +29,7 @@ CREATE TABLE cantina.Vino (
 );
 
 -- Tabella StoricoPrezzo: storico dei prezzi per ogni vino (si può integrare con JSON esterno se richiesto)
-CREATE TABLE cantina.StoricoPrezzo (
+CREATE TABLE cantina.Storico_Prezzo (
     storico_id INT AUTO_INCREMENT PRIMARY KEY,
     vino_id INT NOT NULL,
     data_registro DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -57,7 +57,7 @@ CREATE TABLE cantina.Ordine (
 );
 
 -- Tabella DettaglioOrdine: contiene i vini (o bottiglie) relativi ad ogni ordine
-CREATE TABLE cantina.DettaglioOrdine (
+CREATE TABLE cantina.Dettaglio_Ordine (
     dettaglio_id INT AUTO_INCREMENT PRIMARY KEY,
     ordine_id INT NOT NULL,
     vino_id INT NOT NULL,
@@ -114,15 +114,28 @@ CREATE TABLE cantina.Recensione (
 -- Tabella Domanda: contiene il testo delle domande del questionario
 CREATE TABLE cantina.Questionario (
     domanda_id INT AUTO_INCREMENT PRIMARY KEY,
-    testo_domanda TEXT NOT NULL
+    testo_domanda TEXT NOT null,
+    caratteristica ENUM('Amarezza', 'Tannicita', 'Dolcezza', 'Acidita', 'Corpo','Persistenza', 'Intensita', 'Equilibrio', 'Complessita','Aromaticita', 'Freschezza', 'Morbidezza', 'Effervescenza','Calore') NOT NULL
 );
 
+-- Tabella per le opzioni di risposta predefinite
+CREATE TABLE cantina.Opzioni_Risposta (
+    opzione_id INT AUTO_INCREMENT PRIMARY KEY,
+    domanda_id INT NOT NULL,
+    testo_risposta TEXT NOT NULL,
+    punteggio INT CHECK (punteggio BETWEEN 0 AND 5),
+    FOREIGN KEY (domanda_id) REFERENCES cantina.Questionario(domanda_id) ON DELETE CASCADE
+);
+ 
 -- Tabella RispostaQuestionario: risposte date dagli utenti al questionario
-CREATE TABLE cantina.RispostaQuestionario (
+CREATE TABLE cantina.Risposta_Questionario (
     risposta_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
     domanda_id INT NOT NULL,
-    punteggio_risposta INT CHECK (punteggio_risposta BETWEEN 1 AND 5),
-    FOREIGN KEY (user_id) REFERENCES cantina.Utente(user_id) on delete cascade,
-    FOREIGN KEY (domanda_id) REFERENCES cantina.Questionario(domanda_id) on delete cascade
+    opzione_scelta_id INT NOT NULL,
+    data_risposta DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES cantina.Utente(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (domanda_id) REFERENCES cantina.Questionario(domanda_id) ON DELETE CASCADE,
+    FOREIGN KEY (opzione_scelta_id) REFERENCES cantina.Opzioni_Risposta(opzione_id) ON DELETE CASCADE,
+    UNIQUE KEY (user_id, domanda_id)
 );
