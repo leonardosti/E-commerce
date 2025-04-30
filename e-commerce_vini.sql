@@ -21,11 +21,20 @@ CREATE TABLE cantina.Vino (
     vitigni VARCHAR(100),
     prezzo_vendita DECIMAL(10,2) NOT NULL,
     punteggio_qualita INT CHECK (punteggio_qualita BETWEEN 0 AND 100),
-    gusto INT CHECK (gusto BETWEEN 1 AND 5),
-    salinita INT CHECK (salinita BETWEEN 1 AND 5),
-    acidita INT CHECK (acidita BETWEEN 1 AND 5),
-    forte INT CHECK (forte BETWEEN 1 AND 5),
-    tannicita INT CHECK (tannicita BETWEEN 1 AND 5)
+    amarezza  INT CHECK (gusto BETWEEN 1 AND 5),
+    tanniccita  INT CHECK (gusto BETWEEN 1 AND 5),
+    dolcezza  INT CHECK (gusto BETWEEN 1 AND 5),
+    acidita  INT CHECK (gusto BETWEEN 1 AND 5),
+    corposita  INT CHECK (gusto BETWEEN 1 AND 5),
+    persistenza  INT CHECK (gusto BETWEEN 1 AND 5),
+    intensita  INT CHECK (gusto BETWEEN 1 AND 5),
+    equilibrio  INT CHECK (gusto BETWEEN 1 AND 5),
+    complessita  INT CHECK (gusto BETWEEN 1 AND 5),
+    aromaticita  INT CHECK (gusto BETWEEN 1 AND 5),
+    freschezza  INT CHECK (gusto BETWEEN 1 AND 5),
+    morbidezza  INT CHECK (gusto BETWEEN 1 AND 5),
+    effervescenza  INT CHECK (gusto BETWEEN 1 AND 5),
+    calore  INT CHECK (gusto BETWEEN 1 AND 5)    
 );
 
 -- Tabella StoricoPrezzo: storico dei prezzi per ogni vino (si può integrare con JSON esterno se richiesto)
