@@ -1,6 +1,6 @@
 <?php
 session_start();
-require 'database/db_connection.php';
+require 'database/db_attributes.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = trim($_POST['email']);

@@ -1,13 +1,10 @@
 <?php
+require 'assets/header.php';
 ?>
-
-<head>
-    <title>Homepage</title>
-</head>
-<?php include 'assets/header.php'; ?>
-<div class="container mt-5">
-    <h1>Benvenuto!</h1>
-    <p>Questa è la tua homepage.</p>
+<div class="content">
+    <h1><?=/**@var $dati*/$dati['titolo']?></h1>
+    <h2><?=/**@var $dati*/$dati['sottotitolo']?></h2>
 </div>
-<?php include 'assets/footer.php'; ?>
-
+<?php
+require 'assets/footer.php';
+?>
