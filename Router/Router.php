@@ -1,22 +1,31 @@
 <?php
-
 namespace Router;
 
-class Router
-{
-    private array $route = [];
-    public function addRoute($method, $url, $controller, $action):void {
-        $this->route[$method][$url] = [
+class Router {
+    private $routes = [];
+
+    public function addRoute($method, $path, $controller, $action) {
+        $this->routes[$method][$path] = [
             'controller' => $controller,
             'action' => $action
         ];
     }
-    public function matchRoute($url, $method):array {
-        $values = [];
-        if(array_key_exists($url, $this->route[$method])) {
-            $values['controller'] = $this->route[$method][$url]['controller'];
-            $values['action'] = $this->route[$method][$url]['action'];
+
+    public function matchRoute($url, $method) {
+        foreach ($this->routes[$method] as $routePath => $route) {
+            // Sostituisci i parametri dinamici con regex
+            $pattern = preg_replace('#\{[a-z]+\}#', '([^/]+)', $routePath);
+            $pattern = "#^$pattern$#";
+
+            if (preg_match($pattern, $url, $matches)) {
+                array_shift($matches);
+                return [
+                    'controller' => $route['controller'],
+                    'action' => $route['action'],
+                    'params' => $matches
+                ];
+            }
         }
-        return $values;
+        return null;
     }
 }

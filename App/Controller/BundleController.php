@@ -2,7 +2,7 @@
 
 namespace Controller;
 
-class BoundleController
+class BundleController
 {
 
 }

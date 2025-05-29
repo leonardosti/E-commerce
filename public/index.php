@@ -1,13 +1,16 @@
 <?php
-$config = require 'config.php';
-$method = $_SERVER['REQUEST_METHOD'];
-$url = strtolower($_SERVER['REQUEST_URI']);
-$url = trim(str_replace($config['prjName'], '', $url), '/');
+// Autoloader
+spl_autoload_register(function ($class) {
+    $file = __DIR__ . '/../' . str_replace('\\', '/', $class) . '.php';
+    if (file_exists($file)) {
+        require $file;
+    }
+});
 
-$db = require 'Database/db_connection.php';
-require_once 'Router/Router.php';
-use Router\Router;
-$router = new Router();
+// Configurazione database
+$db = require __DIR__ . '/../Database/db_connection.php';
+
+$router = new Router\Router();
 
 // ————————————————————————————————————————————————————————————————————————
 // 1) HomeController
@@ -82,18 +85,26 @@ $router->addRoute('POST', 'carrello/remove','CarrelloController', 'remove');
 $router->addRoute('GET',  'carrello/checkout',     'CarrelloController', 'checkout');
 $router->addRoute('POST', 'carrello/confirm',      'CarrelloController', 'confirm');
 
+// Elaborazione della richiesta
+$method = $_SERVER['REQUEST_METHOD'];
+$url = isset($_GET['url']) ? rtrim($_GET['url'], '/') : '';
 
-// match delle rotte
+// Match della rotta
 $route = $router->matchRoute($url, $method);
+
 if (!$route) {
     http_response_code(404);
-    echo "Pagina non trovata";
-    exit;
+    die("Pagina non trovata");
 }
 
-// autoload della classe controller
-$controllerClass = 'App\Controller\\'.$route['controller'];
+// Controller
+$controllerClass = 'App\Controller\\' . $route['controller'];
 $action = $route['action'];
-require $controllerClass.'.php';
-$controllerClass = new $controllerClass($db);
-$controllerClass->$action();
+
+if (!class_exists($controllerClass)) {
+    die("Controller $controllerClass non trovato!");
+}
+
+$controller = new $controllerClass($db);
+
+call_user_func_array([$controller, $action], $route['params']);
