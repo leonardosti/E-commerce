@@ -10,6 +10,6 @@ class HomeController
             'sottotitolo' => 'Scopri i nostri vini pregiati!'
         ];
 
-        require __DIR__.'/../View/index.php';
+        require __DIR__ . '/../View/index.php';
     }
 }
