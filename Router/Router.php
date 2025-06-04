@@ -13,7 +13,6 @@ class Router {
 
     public function matchRoute($url, $method) {
         foreach ($this->routes[$method] as $routePath => $route) {
-            // Sostituisci i parametri dinamici con regex
             $pattern = preg_replace('#\{[a-z]+\}#', '([^/]+)', $routePath);
             $pattern = "#^$pattern$#";
 

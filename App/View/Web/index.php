@@ -37,81 +37,47 @@ require 'assets/header.php';
         </div>
     </section>
 
-    <!-- Sezione prodotti in evidenza -->
+    <!-- Sezione Prodotti in Evidenza -->
     <section class="featured-products py-5">
         <div class="container">
             <div class="row">
-                <!-- Prodotto 1 -->
-                <div class="col-md-4 mb-4">
-                    <div class="card product-card h-100">
-                        <div class="product-image">
-                            <a href="#">
-                                <img src="images/product1.png" class="card-img-top" alt="Chardonnay 'Marna' Girlan 2023">
-                            </a>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">
-                                <a href="#" class="text-decoration-none text-dark">Chardonnay 'Marna' Girlan 2023</a>
-                            </h5>
-                            <div class="d-flex justify-content-between align-items-center mt-3">
-                                <div class="price">
-                                    <span class="fs-4">16<span class="fs-6">,00 €</span></span>
+                <?php if (empty($dati['limitVini'])): ?>
+                    <p>Nessun prodotto in evidenza.</p>
+                <?php else: ?>
+                    <?php foreach ($dati['limitVini'] as $vino): ?>
+                        <div class="col-md-4 mb-4">
+                            <div class="card product-card h-100">
+                                <div class="product-image">
+                                    <a href="">
+                                        <img src="<?= $config['url'].'assets/CartellaImmagini/'.htmlspecialchars($vino['immagine']) ?>"
+                                             class="card-img-top"
+                                             alt="<?= htmlspecialchars($vino['nome']) ?>">
+                                    </a>
                                 </div>
-                                <button class="btn btn-outline-burgundy add-to-cart">
-                                    <i class="fas fa-shopping-cart"></i>
-                                </button>
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <a href=""
+                                           class="text-decoration-none text-dark">
+                                            <?= htmlspecialchars($vino['nome']) ?>
+                                        </a>
+                                    </h5>
+                                    <div class="d-flex justify-content-between align-items-center mt-3">
+                                        <div class="price">
+                                            <span class="fs-4">
+                                                <?= number_format($vino['prezzo_vendita'], 2, ',', '.') ?>
+                                                <span class="fs-6">€</span>
+                                            </span>
+                                        </div>
+                                        <button class="btn btn-outline-burgundy add-to-cart"
+                                                data-vino-id="<?= $vino['vino_id'] ?>">
+                                            <i class="fas fa-shopping-cart"></i>
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-
-                <!-- Prodotto 2 -->
-                <div class="col-md-4 mb-4">
-                    <div class="card product-card h-100">
-                        <div class="product-image">
-                            <a href="#">
-                                <img src="images/product2.png" class="card-img-top" alt="Juliénas Domaine de Boischampt 2023">
-                            </a>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">
-                                <a href="#" class="text-decoration-none text-dark">Juliénas Domaine de Boischampt 2023</a>
-                            </h5>
-                            <div class="d-flex justify-content-between align-items-center mt-3">
-                                <div class="price">
-                                    <span class="fs-4">16<span class="fs-6">,20 €</span></span>
-                                </div>
-                                <button class="btn btn-outline-burgundy add-to-cart">
-                                    <i class="fas fa-shopping-cart"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Prodotto 3 -->
-                <div class="col-md-4 mb-4">
-                    <div class="card product-card h-100">
-                        <div class="product-image">
-                            <a href="#">
-                                <img src="images/product3.png" class="card-img-top" alt="Cabernet Franc Castelvecchio 2022">
-                            </a>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">
-                                <a href="#" class="text-decoration-none text-dark">Cabernet Franc Castelvecchio 2022</a>
-                            </h5>
-                            <div class="d-flex justify-content-between align-items-center mt-3">
-                                <div class="price">
-                                    <span class="fs-4">18<span class="fs-6">,00 €</span></span>
-                                </div>
-                                <button class="btn btn-outline-burgundy add-to-cart">
-                                    <i class="fas fa-shopping-cart"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    <?php endforeach; ?>
+                <?php endif; ?>
             </div>
         </div>
     </section>
@@ -242,18 +208,17 @@ require 'assets/header.php';
         </div>
     </section>
 
-    <!-- Sezione Presentazione -->
+    <!-- Presentazione -->
     <section class="about-us py-5 bg-light">
         <div class="container">
             <div class="row">
                 <div class="col-md-8 mx-auto text-center">
-                    <h2 class="mb-4">Callmewine, la tua enoteca online, il tuo personale sommelier</h2>
-                    <p class="lead">
-                        L'idea di creare Callmewine, un'enoteca specializzata nella <strong>vendita di vino online</strong>, è nata dalla passione per il vino e per il mondo che lo circonda: il fascino delle cantine e delle loro tradizioni, l'impegno e la pazienza nascosti in ogni bottiglia, la bellezza delle colline coperte di vigne, i loro verdi estivi e i loro rossi e gialli autunnali, il profumo intenso di mosto che si sprigiona nelle giornate di ottobre, i paesaggi nebbiosi e coperti di bruma, l'allegria di certe serate con gli amici... Del vino ci affascina tutto, ma proprio tutto.
-                    </p>
-                    <p>
-                        Assaggio dopo assaggio, lavoriamo ogni giorno per migliorare la nostra offerta di vini rossi, vini bianchi, champagne e distillati: siamo convinti che <strong>selezionare sia più importante che proporre tutto</strong> indistintamente.
-                    </p>
+                    <h2 class="mb-4">
+                        <?= htmlspecialchars($dati['presentazione']['titolo']) ?>
+                    </h2>
+                    <?php foreach ($dati['presentazione']['paragrafi'] as $par): ?>
+                        <p class="lead"><?= htmlspecialchars($par) ?></p>
+                    <?php endforeach; ?>
                 </div>
             </div>
         </div>

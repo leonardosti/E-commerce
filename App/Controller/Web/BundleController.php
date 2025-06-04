@@ -1,7 +1,6 @@
 <?php
 
-namespace Controller;
-
+namespace App\Controller\Web;
 class BundleController
 {
 

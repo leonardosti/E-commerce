@@ -1,6 +1,6 @@
 <?php
 session_start();
-$config = require __DIR__ . '/../../../config.php';
+$config = require __DIR__ . '/../../../../Config/config.php';
 ?>
 <!DOCTYPE html>
 <html lang="it">

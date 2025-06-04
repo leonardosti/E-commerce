@@ -1,6 +1,6 @@
 <?php
 
-namespace Model;
+namespace App\Model;
 use PDO;
 
 class Vino
@@ -21,6 +21,14 @@ class Vino
         $query = "SELECT * FROM vini where id = :id";
         $stmt = $this->db->prepare($query);
         $stmt->execute(['id' => $id]);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    public function getViniLimit($limit = 3):array{
+        $query = "SELECT vino_id, nome, prezzo_vendita, anno, immagine FROM Vino LIMIT :limit";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindValue(':limit', $limit, \PDO::PARAM_INT);
         $stmt->execute();
         return $stmt->fetchAll();
     }

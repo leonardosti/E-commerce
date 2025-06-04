@@ -5,6 +5,7 @@ spl_autoload_register(function ($class) {
     if (file_exists($file)) {
         require $file;
     }
+
 });
 
 // Configurazione database
@@ -41,7 +42,7 @@ $router->addRoute('POST', 'vino/edit',    'VinoController', 'update');
 $router->addRoute('GET',  'vino/delete',  'VinoController', 'delete');
 
 // ————————————————————————————————————————————————————————————————————————
-// 4) AbbonamentoController
+// 4) AbbonamentoApiController
 // ————————————————————————————————————————————————————————————————————————
 $router->addRoute('GET',  'abbonamento/index',       'AbbonamentoController', 'index');
 $router->addRoute('GET',  'abbonamento/subscribe',    'AbbonamentoController', 'showSubscribeForm');
@@ -97,8 +98,12 @@ if (!$route) {
     die("Pagina non trovata");
 }
 
-// Controller
-$controllerClass = 'App\Controller\\' . $route['controller'];
+// API e WEB Controller
+if (str_contains($route['controller'], 'ApiController')) {
+    $controllerClass = 'App\Controller\API\\' . $route['controller'];
+} else {
+    $controllerClass = 'App\Controller\Web\\' . $route['controller'];
+}
 $action = $route['action'];
 
 if (!class_exists($controllerClass)) {
