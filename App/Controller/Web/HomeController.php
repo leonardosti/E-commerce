@@ -3,20 +3,22 @@
 namespace App\Controller\Web;
 
 use App\Model\Vino;
+use App\Model\Abbonamento;
 use Exception;
 
 class HomeController
 {
     private $vino;
-
+    private $abbonamento;
     public function __construct(){
         $this->vino = new Vino();
+        $this->abbonamento = new Abbonamento();
     }
     public function index()
     {
         try {
-            $ViniScelti = $this->vino->getViniLimit(3);
-
+            $viniScelti = $this->vino->getViniLimit(3);
+            $abbonamenti = $this->abbonamento->getAbbonamento();
             $presentazione = [
                 'titolo' => 'Vinum Novum, la tua enoteca online',
                 'paragrafi' => [
@@ -31,7 +33,8 @@ class HomeController
 
         // Array dei dati
         $dati = [
-            'ViniScelti' => $ViniScelti,
+            'ViniScelti' => $viniScelti,
+            'Abbonamenti' => $abbonamenti,
             'presentazione' => $presentazione
         ];
 

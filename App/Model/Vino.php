@@ -11,14 +11,14 @@ class Vino
         $this->db = require __DIR__.'/../../Database/db_connection.php';
     }
     // Utente
-    public function getVini():array{
-        $query = "SELECT * FROM vini";
+    public function getViniDisponibili():array{
+        $query = "SELECT * FROM vino JOIN magazzino ON magazzino.vino_id = vino.vino_id WHERE ordinabilita = 'Si' OR ordinabilita = 'Forse'";
         $stmt = $this->db->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll();
     }
     public function getViniByID($id):array{
-        $query = "SELECT * FROM vini where id = :id";
+        $query = "SELECT * FROM vino where id = :id";
         $stmt = $this->db->prepare($query);
         $stmt->execute(['id' => $id]);
         $stmt->execute();

@@ -6,33 +6,33 @@ session_start();
     </head>
 <?php include 'assets/header.php'; ?>
 
-    <main class="container mt-5" style="max-width: 500px;">
-        <h2 class="mb-4">Accedi al tuo account</h2>
+    <!-- Form Accesso -->
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-5 col-md-8">
+                <div class="card shadow-sm">
+                    <div class="card-body p-4">
+                        <div class="text-center mb-4">
+                            <h2 class="fw-bold text-primary">Accedi a Vinum Novum</h2>
+                            <p class="text-muted">Inserisci le tue credenziali per accedere al sistema</p>
+                        </div>
+                        <form method="POST" action="">
+                            <?= $controller->form($attributi);?>
+                            <div class="mb-4 form-check">
+                                <a href="#" class="float text-primary">Password dimenticata?</a>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100 py-2">
+                                <i class="fas fa-sign-in-alt me-2"></i>Accedi
+                            </button>
+                        </form>
 
-        <?php
-        // Mostra eventuale messaggio di errore (es. login fallito)
-        if (isset($_GET['error'])) {
-            echo '<div class="alert alert-danger">Credenziali non valide. Riprova.</div>';
-        }
-        ?>
-
-        <form action="process_login.php" method="POST">
-            <div class="mb-3">
-                <label for="email" class="form-label">Email o username</label>
-                <input type="text" class="form-control" id="email" name="email" required>
+                        <div class="text-center mt-4">
+                            <p class="mb-0">Non hai un account? <a href="index.php?url=utente/register" class="text-primary">Registrati</a></p>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" name="password" required>
-            </div>
-
-            <button type="submit" class="btn btn-dark w-100">Accedi</button>
-        </form>
-
-        <div class="mt-3 text-center">
-            <p>Non hai un account? <a href="register.php">Registrati</a></p>
         </div>
-    </main>
+    </div>
 
 <?php include 'assets/footer.php'; ?>

@@ -13,13 +13,13 @@ class VinoController {
 
     // GET /api/vini
     public function index() {
-        $vini = $this->model->getAll();
+        $vini = $this->model->getVini();
         $this->sendJsonResponse($vini);
     }
 
     // GET /api/vini/{id}
     public function show($id) {
-        $vino = $this->model->getById($id);
+        $vino = $this->model->getViniById($id);
 
         if (!$vino) {
             $this->sendJsonResponse(['error' => 'Vino non trovato'], 404);

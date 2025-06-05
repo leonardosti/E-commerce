@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 $config = require __DIR__ . '/../../../../Config/config.php';
 ?>
 <!DOCTYPE html>
@@ -13,28 +15,46 @@ $config = require __DIR__ . '/../../../../Config/config.php';
     <link rel="stylesheet" href="<?= $config['css']?>">
 </head>
 <body>
-<!-- Header con logo e navigazione -->
+
+<!-- Header -->
 <header class="bg-white p-4">
     <div class="container">
         <div class="row align-items-center">
+
+            <!-- Logo -->
             <div class="col-md-6 col-6">
-                <a class="navbar-brand" href="i#"><h3>Vinum Novum</h3></a>
+                <a class="navbar-brand" href="index.php">
+                    <h3>Vinum Novum</h3>
+                </a>
             </div>
-            <!-- Utente e Carrello -->
+
+            <!-- Carrello e area utente -->
             <div class="col-md-6 col-6 text-end">
-                <div class="header-icons">
-                    <a href="index.php?url=utente/login" class="me-3"><i class="fas fa-user"></i></a>
-                    <a href="index.php?url=carrello/index"" class="position-relative">
-                        <i class="fas fa-shopping-cart"></i>
+                <div class="d-inline-block m-3">
+                    <a href="index.php?url=carrello/index" class="position-relative text-dark">
+                        <i class="fas fa-shopping-cart fa-lg"></i>
                         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-burgundy">0</span>
                     </a>
+                </div>
+                <div class="d-inline-block nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-dark" href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-user fa-lg"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="index.php?url=utente/login">Accedi</a></li>
+                        <li><a class="dropdown-item" href="index.php?url=utente/register">Registrati</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#">Profilo</a></li>
+                        <li><a class="dropdown-item" href="#">Esci</a></li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
 </header>
 
-<!-- Menu di navigazione principale -->
+
+<!-- Menu di navigazione -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
@@ -47,14 +67,14 @@ $config = require __DIR__ . '/../../../../Config/config.php';
                         Cantina
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="">Rossi</a></li>
-                        <li><a class="dropdown-item" href="">Bianchi</a></li>
-                        <li><a class="dropdown-item" href="">Champagne</a></li>
-                        <li><a class="dropdown-item" href="">Spumanti</a></li>
+                        <li><a class="dropdown-item" href="index.php?url=magazzino/rossi">Rossi</a></li>
+                        <li><a class="dropdown-item" href="index.php?url=magazzino/bianchi">Bianchi</a></li>
+                        <li><a class="dropdown-item" href="index.php?url=magazzino/champagne">Champagne</a></li>
+                        <li><a class="dropdown-item" href="index.php?url=magazzino/spumanti">Spumanti</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Tutti i Vini</a>
+                    <a class="nav-link" href="index.php?url=magazzino/index">Tutti i Vini</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Bundle</a>

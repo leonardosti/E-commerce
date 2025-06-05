@@ -151,61 +151,54 @@ require 'assets/header.php';
     </section>
 
 
-
     <!-- Sezione No-Low Alcol -->
     <section class="no-low-alcohol py-5">
         <div class="container">
-            <h2 class="text-center mb-5">No-Low Alcol: leggerezza senza rinunce</h2>
+            <h2 class="text-center mb-5">Abbonamenti scelti per te</h2>
             <div class="row">
-                <!-- Prodotto 1 -->
-                <div class="col-md-4 mb-4">
-                    <div class="card product-card h-100">
-                        <div class="product-image position-relative">
-                            <span class="badge bg-burgundy position-absolute top-0 end-0 m-2">SCONTO</span>
-                            <a href="#">
-                                <img src="images/noalcohol1.png" class="card-img-top" alt="Aperitivo Americano Analcolico">
-                            </a>
+                <?php if (empty($dati['Abbonamenti'])): ?>
+                    <p>Nessun abbonamento in evidenza.</p>
+                <?php else: ?>
+                    <?php foreach ($dati['Abbonamenti'] as $abbonamento): ?>
+                        <div class="col-md-3 mb-4">
+                            <div class="card product-card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <a href=""
+                                           class="text-decoration-none text-dark">
+                                            <h3><?= htmlspecialchars($abbonamento['nome']) ?></h3><br>
+                                            <?= htmlspecialchars($abbonamento['descrizione']) ?><br>
+                                        </a>
+                                    </h5>
+                                    <div class="d-flex justify-content-between align-items-center mt-3">
+                                        <div class="price">
+                                            <span class="fs-4">
+                                                <?= number_format($abbonamento['prezzo'], 2, ',', '.') ?>
+                                                <span class="fs-6">€</span>
+                                            </span>
+                                        </div>
+                                        <button class="btn btn-outline-burgundy add-to-cart"
+                                                data-vino-id="<?= $abbonamento['livello_id'] ?>">
+                                            <i class="fas fa-shopping-cart"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="card-body">
-                            <h5 class="card-title">
-                                <a href="#" class="text-decoration-none text-dark">Aperitivo Americano Analcolico</a>
-                            </h5>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Prodotto 2 -->
-                <div class="col-md-4 mb-4">
-                    <div class="card product-card h-100">
-                        <div class="product-image">
-                            <a href="#">
-                                <img src="images/noalcohol2.png" class="card-img-top" alt="Alcohol Free Sparkling 'Limited Edition'">
-                            </a>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">
-                                <a href="#" class="text-decoration-none text-dark">Alcohol Free Sparkling 'Limited Edition'</a>
-                            </h5>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Prodotto 3 -->
-                <div class="col-md-4 mb-4">
-                    <div class="card product-card h-100">
-                        <div class="product-image position-relative">
-                            <span class="badge bg-burgundy position-absolute top-0 end-0 m-2">SCONTO</span>
-                            <a href="#">
-                                <img src="images/noalcohol3.png" class="card-img-top" alt="Riesling Sparkling Alkoholfrei">
-                            </a>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">
-                                <a href="#" class="text-decoration-none text-dark">Riesling Sparkling Alkoholfrei</a>
-                            </h5>
+                    <?php endforeach; ?>
+                    <div class="col-md-3 mb-4">
+                        <div class="promo-card">
+                            <div class="promo-image position-relative">
+                                <a href="">
+                                    <img src="<?= $config['url'] . 'assets/CartellaImmagini/abbonamento.jpg' ?>" alt="Abbonamento" class="img-fluid">
+                                    <div class="promo-overlay">
+                                        <h3 class="text-white">Scopri di piu'</h3>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
+                <?php endif; ?>
             </div>
         </div>
     </section>

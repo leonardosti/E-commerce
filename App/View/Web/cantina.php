@@ -6,7 +6,7 @@
     <div class="container mt-3">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html" class="text-decoration-none text-muted">Home</a></li>
+                <li class="breadcrumb-item"><a href="index.php" class="text-decoration-none text-muted">Home</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Vini Rossi</li>
             </ol>
         </nav>
@@ -161,236 +161,47 @@
     <section class="products py-4">
         <div class="container">
             <div class="row">
-                <!-- Prodotto 1 -->
-                <div class="col-md-4 col-6 mb-4">
-                    <div class="card product-card h-100">
-                        <div class="product-image">
-                            <a href="#">
-                                <img src="images/product1.png" class="card-img-top" alt="Barolo DOCG">
-                            </a>
-                            <span class="badge bg-burgundy position-absolute top-0 end-0 m-2">-10%</span>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">
-                                <a href="#" class="text-decoration-none text-dark">Barolo DOCG 2019</a>
-                            </h5>
-                            <p class="text-muted mb-2">Piemonte - Nebbiolo</p>
-                            <div class="d-flex justify-content-between align-items-center mt-3">
-                                <div class="price">
-                                    <span class="text-decoration-line-through text-muted me-2">45,00 €</span>
-                                    <span class="fs-4">40<span class="fs-6">,50 €</span></span>
+                <!-- Prodotti -->
+                <?php if (empty($dati['Vini'])): ?>
+                    <p>Nessun prodotto in evidenza.</p>
+                <?php else: ?>
+                    <h2 class="text-center mb-5">Le nostre scelte per te</h2>
+                    <?php foreach ($dati['Vini'] as $vino): ?>
+                        <div class="col-md-4 mb-4">
+                            <div class="card product-card h-100">
+                                <div class="product-image">
+                                    <a href="">
+                                        <img src="<?= $config['url'].'assets/CartellaImmagini/'.htmlspecialchars($vino['immagine']) ?>"
+                                             class="card-img-top"
+                                             alt="<?= htmlspecialchars($vino['nome']) ?>">
+                                    </a>
                                 </div>
-                                <button class="btn btn-outline-burgundy add-to-cart">
-                                    <i class="fas fa-shopping-cart"></i>
-                                </button>
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <a href=""
+                                           class="text-decoration-none text-dark">
+                                            <?= htmlspecialchars($vino['nome']) ?>
+                                            <?= htmlspecialchars($vino['cantina']) ?>
+                                            <?= htmlspecialchars($vino['anno']) ?>
+                                        </a>
+                                    </h5>
+                                    <div class="d-flex justify-content-between align-items-center mt-3">
+                                        <div class="price">
+                                            <span class="fs-4">
+                                                <?= number_format($vino['prezzo_vendita'], 2, ',', '.') ?>
+                                                <span class="fs-6">€</span>
+                                            </span>
+                                        </div>
+                                        <button class="btn btn-outline-burgundy add-to-cart"
+                                                data-vino-id="<?= $vino['vino_id'] ?>">
+                                            <i class="fas fa-shopping-cart"></i>
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-
-                <!-- Prodotto 2 -->
-                <div class="col-md-4 col-6 mb-4">
-                    <div class="card product-card h-100">
-                        <div class="product-image">
-                            <a href="#">
-                                <img src="images/product3.png" class="card-img-top" alt="Brunello di Montalcino">
-                            </a>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">
-                                <a href="#" class="text-decoration-none text-dark">Brunello di Montalcino DOCG 2018</a>
-                            </h5>
-                            <p class="text-muted mb-2">Toscana - Sangiovese</p>
-                            <div class="d-flex justify-content-between align-items-center mt-3">
-                                <div class="price">
-                                    <span class="fs-4">52<span class="fs-6">,00 €</span></span>
-                                </div>
-                                <button class="btn btn-outline-burgundy add-to-cart">
-                                    <i class="fas fa-shopping-cart"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Prodotto 3 -->
-                <div class="col-md-4 col-6 mb-4">
-                    <div class="card product-card h-100">
-                        <div class="product-image">
-                            <a href="#">
-                                <img src="images/product1.png" class="card-img-top" alt="Amarone della Valpolicella">
-                            </a>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">
-                                <a href="#" class="text-decoration-none text-dark">Amarone della Valpolicella DOCG 2020</a>
-                            </h5>
-                            <p class="text-muted mb-2">Veneto - Corvina, Rondinella</p>
-                            <div class="d-flex justify-content-between align-items-center mt-3">
-                                <div class="price">
-                                    <span class="fs-4">48<span class="fs-6">,50 €</span></span>
-                                </div>
-                                <button class="btn btn-outline-burgundy add-to-cart">
-                                    <i class="fas fa-shopping-cart"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Prodotto 4 -->
-                <div class="col-md-4 col-6 mb-4">
-                    <div class="card product-card h-100">
-                        <div class="product-image">
-                            <a href="#">
-                                <img src="images/product3.png" class="card-img-top" alt="Chianti Classico Riserva">
-                            </a>
-                            <span class="badge bg-burgundy position-absolute top-0 end-0 m-2">-15%</span>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">
-                                <a href="#" class="text-decoration-none text-dark">Chianti Classico Riserva DOCG 2019</a>
-                            </h5>
-                            <p class="text-muted mb-2">Toscana - Sangiovese</p>
-                            <div class="d-flex justify-content-between align-items-center mt-3">
-                                <div class="price">
-                                    <span class="text-decoration-line-through text-muted me-2">32,00 €</span>
-                                    <span class="fs-4">27<span class="fs-6">,20 €</span></span>
-                                </div>
-                                <button class="btn btn-outline-burgundy add-to-cart">
-                                    <i class="fas fa-shopping-cart"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Prodotto 5 -->
-                <div class="col-md-4 col-6 mb-4">
-                    <div class="card product-card h-100">
-                        <div class="product-image">
-                            <a href="#">
-                                <img src="images/product1.png" class="card-img-top" alt="Primitivo di Manduria">
-                            </a>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">
-                                <a href="#" class="text-decoration-none text-dark">Primitivo di Manduria DOC 2021</a>
-                            </h5>
-                            <p class="text-muted mb-2">Puglia - Primitivo</p>
-                            <div class="d-flex justify-content-between align-items-center mt-3">
-                                <div class="price">
-                                    <span class="fs-4">18<span class="fs-6">,90 €</span></span>
-                                </div>
-                                <button class="btn btn-outline-burgundy add-to-cart">
-                                    <i class="fas fa-shopping-cart"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Prodotto 6 -->
-                <div class="col-md-4 col-6 mb-4">
-                    <div class="card product-card h-100">
-                        <div class="product-image">
-                            <a href="#">
-                                <img src="images/product3.png" class="card-img-top" alt="Nero d'Avola">
-                            </a>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">
-                                <a href="#" class="text-decoration-none text-dark">Nero d'Avola DOC 2022</a>
-                            </h5>
-                            <p class="text-muted mb-2">Sicilia - Nero d'Avola</p>
-                            <div class="d-flex justify-content-between align-items-center mt-3">
-                                <div class="price">
-                                    <span class="fs-4">16<span class="fs-6">,50 €</span></span>
-                                </div>
-                                <button class="btn btn-outline-burgundy add-to-cart">
-                                    <i class="fas fa-shopping-cart"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Prodotto 7 -->
-                <div class="col-md-4 col-6 mb-4">
-                    <div class="card product-card h-100">
-                        <div class="product-image">
-                            <a href="#">
-                                <img src="images/product1.png" class="card-img-top" alt="Montepulciano d'Abruzzo">
-                            </a>
-                            <span class="badge bg-burgundy position-absolute top-0 end-0 m-2">-20%</span>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">
-                                <a href="#" class="text-decoration-none text-dark">Montepulciano d'Abruzzo DOC 2021</a>
-                            </h5>
-                            <p class="text-muted mb-2">Abruzzo - Montepulciano</p>
-                            <div class="d-flex justify-content-between align-items-center mt-3">
-                                <div class="price">
-                                    <span class="text-decoration-line-through text-muted me-2">22,50 €</span>
-                                    <span class="fs-4">18<span class="fs-6">,00 €</span></span>
-                                </div>
-                                <button class="btn btn-outline-burgundy add-to-cart">
-                                    <i class="fas fa-shopping-cart"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Prodotto 8 -->
-                <div class="col-md-4 col-6 mb-4">
-                    <div class="card product-card h-100">
-                        <div class="product-image">
-                            <a href="#">
-                                <img src="images/product3.png" class="card-img-top" alt="Barbera d'Alba">
-                            </a>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">
-                                <a href="#" class="text-decoration-none text-dark">Barbera d'Alba DOC 2022</a>
-                            </h5>
-                            <p class="text-muted mb-2">Piemonte - Barbera</p>
-                            <div class="d-flex justify-content-between align-items-center mt-3">
-                                <div class="price">
-                                    <span class="fs-4">19<span class="fs-6">,80 €</span></span>
-                                </div>
-                                <button class="btn btn-outline-burgundy add-to-cart">
-                                    <i class="fas fa-shopping-cart"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Prodotto 9 -->
-                <div class="col-md-4 col-6 mb-4">
-                    <div class="card product-card h-100">
-                        <div class="product-image">
-                            <a href="#">
-                                <img src="images/product1.png" class="card-img-top" alt="Cannonau di Sardegna">
-                            </a>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">
-                                <a href="#" class="text-decoration-none text-dark">Cannonau di Sardegna DOC 2021</a>
-                            </h5>
-                            <p class="text-muted mb-2">Sardegna - Cannonau</p>
-                            <div class="d-flex justify-content-between align-items-center mt-3">
-                                <div class="price">
-                                    <span class="fs-4">21<span class="fs-6">,50 €</span></span>
-                                </div>
-                                <button class="btn btn-outline-burgundy add-to-cart">
-                                    <i class="fas fa-shopping-cart"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    <?php endforeach; ?>
+                <?php endif; ?>
             </div>
         </div>
     </section>

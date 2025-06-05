@@ -23,9 +23,9 @@ $router->addRoute('GET',  'home/presentation1','HomeController', 'presentation1'
 // ————————————————————————————————————————————————————————————————————————
 // 2) UtenteController
 // ————————————————————————————————————————————————————————————————————————
-$router->addRoute('GET',  'utente/login',      'UtenteController', 'showLoginForm');
+$router->addRoute('GET',  'utente/login',      'UtenteController', 'login');
 $router->addRoute('POST', 'utente/login',      'UtenteController', 'login');
-$router->addRoute('GET',  'utente/register',   'UtenteController', 'showRegisterForm');
+$router->addRoute('GET',  'utente/register',   'UtenteController', 'register');
 $router->addRoute('POST', 'utente/register',   'UtenteController', 'register');
 $router->addRoute('GET',  'utente/profile',    'UtenteController', 'profile');
 $router->addRoute('GET',  'utente/logout',     'UtenteController', 'logout');
@@ -62,6 +62,10 @@ $router->addRoute('GET',  'bundle/delete/{id}',  'BundleController', 'delete');
 // 6) MagazzinoController
 // ————————————————————————————————————————————————————————————————————————
 $router->addRoute('GET',  'magazzino/index',         'MagazzinoController', 'index');
+$router->addRoute('GET',  'magazzino/rossi',         'MagazzinoController', 'filter');
+$router->addRoute('GET',  'magazzino/spumanti',         'MagazzinoController', 'filter');
+$router->addRoute('GET',  'magazzino/champagne',         'MagazzinoController', 'filter');
+$router->addRoute('GET',  'magazzino/bianchi',         'MagazzinoController', 'filter');
 $router->addRoute('POST', 'magazzino/update',  'MagazzinoController', 'update');
 
 // ————————————————————————————————————————————————————————————————————————
