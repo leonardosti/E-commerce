@@ -1,5 +1,3 @@
-// Script personalizzato per CallMeWine Clone
-
 document.addEventListener('DOMContentLoaded', function() {
     // Inizializzazione del carosello
     var mainCarousel = document.getElementById('mainCarousel');
@@ -25,13 +23,6 @@ document.addEventListener('DOMContentLoaded', function() {
             icon.classList.remove('fa-shopping-cart');
             icon.classList.add('fa-check');
 
-            // Aggiornamento contatore carrello
-            const cartBadge = document.querySelector('.header-icons .badge');
-            if (cartBadge) {
-                let count = parseInt(cartBadge.textContent);
-                cartBadge.textContent = count + 1;
-            }
-
             // Ripristino stato originale dopo 1 secondo
             setTimeout(() => {
                 this.classList.remove('btn-burgundy');
@@ -42,21 +33,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Gestione barra di ricerca
-    const searchForm = document.querySelector('.search-bar form');
-    if (searchForm) {
-        searchForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const searchInput = this.querySelector('input');
-            if (searchInput.value.trim() !== '') {
-                // Simulazione ricerca
-                console.log('Ricerca per:', searchInput.value);
-                // Qui si potrebbe implementare la vera funzionalità di ricerca
-                searchInput.value = '';
-            }
-        });
-    }
-
     // Gestione hover sulle categorie del menu
     const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
     navLinks.forEach(link => {
@@ -64,16 +40,6 @@ document.addEventListener('DOMContentLoaded', function() {
             this.style.transition = 'color 0.3s ease';
         });
     });
-
-    // Gestione pulsante chat
-    const chatButton = document.querySelector('.chat-button .btn');
-    if (chatButton) {
-        chatButton.addEventListener('click', function() {
-            // Simulazione apertura chat
-            console.log('Apertura chat');
-            // Qui si potrebbe implementare l'apertura di una finestra di chat
-        });
-    }
 
     // Gestione scroll per navbar sticky
     window.addEventListener('scroll', function() {

@@ -26,7 +26,7 @@ class Vino
     }
 
     public function getViniLimit($limit = 3):array{
-        $query = "SELECT vino_id, nome, prezzo_vendita, anno, immagine FROM Vino LIMIT :limit";
+        $query = "SELECT vino_id, nome, prezzo_vendita, cantina, anno, immagine FROM Vino LIMIT :limit";
         $stmt = $this->db->prepare($query);
         $stmt->bindValue(':limit', $limit, \PDO::PARAM_INT);
         $stmt->execute();

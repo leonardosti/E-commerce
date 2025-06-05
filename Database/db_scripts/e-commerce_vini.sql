@@ -23,6 +23,7 @@ CREATE TABLE vinum_novum.Vino (
     nome VARCHAR(100) NOT NULL,
     anno YEAR NOT NULL,
     cantina VARCHAR(100),
+    categoria ENUM('Rosso', 'Bianco', 'Spumante', 'Champagne') NOT NULL,
     prezzo_vendita DECIMAL(10,2) NOT NULL,
     punteggio_qualita INT CHECK (punteggio_qualita BETWEEN 0 AND 100),
     gusto INT CHECK (gusto BETWEEN 1 AND 5),

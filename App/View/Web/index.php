@@ -41,10 +41,11 @@ require 'assets/header.php';
     <section class="featured-products py-5">
         <div class="container">
             <div class="row">
-                <?php if (empty($dati['limitVini'])): ?>
+                <?php if (empty($dati['ViniScelti'])): ?>
                     <p>Nessun prodotto in evidenza.</p>
                 <?php else: ?>
-                    <?php foreach ($dati['limitVini'] as $vino): ?>
+                    <h2 class="text-center mb-5">Le nostre scelte per te</h2>
+                    <?php foreach ($dati['ViniScelti'] as $vino): ?>
                         <div class="col-md-4 mb-4">
                             <div class="card product-card h-100">
                                 <div class="product-image">
@@ -59,6 +60,8 @@ require 'assets/header.php';
                                         <a href=""
                                            class="text-decoration-none text-dark">
                                             <?= htmlspecialchars($vino['nome']) ?>
+                                            <?= htmlspecialchars($vino['cantina']) ?>
+                                            <?= htmlspecialchars($vino['anno']) ?>
                                         </a>
                                     </h5>
                                     <div class="d-flex justify-content-between align-items-center mt-3">
@@ -82,18 +85,18 @@ require 'assets/header.php';
         </div>
     </section>
 
-    <!-- Sezione promozioni -->
+    <!-- Sezione categorie -->
     <section class="promotions py-5 bg-light">
         <div class="container">
-            <h2 class="text-center mb-5">Le nostre incredibili Offerte fino al 30%</h2>
+            <h2 class="text-center mb-5">Le nostre categorie di vini</h2>
             <div class="row">
-                <!-- Promo 1 -->
+                <!-- Categoria 1 -->
                 <div class="col-md-3 mb-4">
                     <div class="promo-card">
                         <div class="promo-image position-relative">
-                            <img src="images/promo1.png" alt="Bianchi in promo" class="img-fluid">
+                            <img src="<?= $config['url'].'assets/CartellaImmagini/promo1.png'?>" alt="Bianchi" class="img-fluid">
                             <div class="promo-overlay">
-                                <h3 class="text-white">BIANCHI <br><span class="display-6">IN PROMO</span></h3>
+                                <h3 class="text-white">BIANCHI</h3>
                             </div>
                         </div>
                         <div class="promo-footer bg-light p-3">
@@ -101,14 +104,13 @@ require 'assets/header.php';
                         </div>
                     </div>
                 </div>
-
-                <!-- Promo 2 -->
+                <!-- Categoria 2 -->
                 <div class="col-md-3 mb-4">
                     <div class="promo-card">
                         <div class="promo-image position-relative">
-                            <img src="images/promo2.png" alt="Rossi in promo" class="img-fluid">
+                            <img src="<?= $config['url'].'assets/CartellaImmagini/promo2.png'?>" alt="Rossi" class="img-fluid">
                             <div class="promo-overlay">
-                                <h3 class="text-white">ROSSI <br><span class="display-6">IN PROMO</span></h3>
+                                <h3 class="text-white">ROSSI</h3>
                             </div>
                         </div>
                         <div class="promo-footer bg-light p-3">
@@ -116,14 +118,13 @@ require 'assets/header.php';
                         </div>
                     </div>
                 </div>
-
-                <!-- Promo 3 -->
+                <!-- Categoria 3 -->
                 <div class="col-md-3 mb-4">
                     <div class="promo-card">
                         <div class="promo-image position-relative">
-                            <img src="images/promo3.png" alt="Champagne in promo" class="img-fluid">
+                            <img src="<?= $config['url'].'assets/CartellaImmagini/promo3.png'?>" alt="Champagne" class="img-fluid">
                             <div class="promo-overlay">
-                                <h3 class="text-white">CHAMPAGNE <br><span class="display-6">IN PROMO</span></h3>
+                                <h3 class="text-white">CHAMPAGNE</h3>
                             </div>
                         </div>
                         <div class="promo-footer bg-light p-3">
@@ -131,14 +132,13 @@ require 'assets/header.php';
                         </div>
                     </div>
                 </div>
-
-                <!-- Promo 4 -->
+                <!-- Categoria 4 -->
                 <div class="col-md-3 mb-4">
                     <div class="promo-card">
                         <div class="promo-image position-relative">
-                            <img src="images/promo4.png" alt="Spumanti in promo" class="img-fluid">
+                            <img src="<?= $config['url'].'assets/CartellaImmagini/promo4.png'?>" alt="Spumanti" class="img-fluid">
                             <div class="promo-overlay">
-                                <h3 class="text-white">SPUMANTI <br><span class="display-6">IN PROMO</span></h3>
+                                <h3 class="text-white">SPUMANTI</h3>
                             </div>
                         </div>
                         <div class="promo-footer bg-light p-3">
@@ -149,6 +149,8 @@ require 'assets/header.php';
             </div>
         </div>
     </section>
+
+
 
     <!-- Sezione No-Low Alcol -->
     <section class="no-low-alcohol py-5">
@@ -206,6 +208,41 @@ require 'assets/header.php';
                 </div>
             </div>
         </div>
+    </section>
+
+    <section class="about-us py-5 bg-light">
+        <div class="max-w-screen-xl mx-auto pb-8 p-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- BOX 1 -->
+                <div class="relative rounded border border-gray-200 px-4 text-center pt-20 pb-4 bg-white">
+                    <div class="absolute flex bg-white left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 w-[100px] h-[100px] px-2">
+                        <img src="https://cdn.shopify.com/s/files/1/0650/4356/2708/files/screen.png?v=1721894221"
+                             class="m-auto w-full h-auto" alt="Icona" width="80" height="80">
+                    </div>
+                    <div class="font-semibold text-secondary-700 mb-2">La tua enoteca online</div>
+                    <div class="text-gray-700 text-sm">Qualità, velocità ed efficienza ci permettono di essere il punto di riferimento nella vendita di Vini e Spirits online, sia per i consumatori finali che per i <a href="https://b2b.callmewine.com/" class="text-pink-600 underline">Professionisti del mondo Ho.re.Ca.</a></div>
+                </div>
+                <!-- BOX 2 -->
+                <div class="relative rounded border border-gray-200 px-4 text-center pt-20 pb-4 bg-white">
+                    <div class="absolute flex bg-white left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 w-[100px] h-[100px] px-2">
+                        <img src="https://cdn.shopify.com/s/files/1/0650/4356/2708/files/glass.png?v=1721894222"
+                             class="m-auto w-full h-auto" alt="Icona" width="80" height="80">
+                    </div>
+                    <div class="font-semibold text-secondary-700 mb-2">Il tuo Personal Sommelier</div>
+                    <div class="text-gray-700 text-sm">Il nostro team di esperti Sommelier assaggia personalmente ogni bottiglia che proponiamo, per selezionare i migliori Vini provenienti dall’Italia e dal mondo.</div>
+                </div>
+                <!-- BOX 3 -->
+                <div class="relative rounded border border-gray-200 px-4 text-center pt-20 pb-4 bg-white">
+                    <div class="absolute flex bg-white left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 w-[100px] h-[100px] px-2">
+                        <img src="https://cdn.shopify.com/s/files/1/0650/4356/2708/files/bottle.png?v=1721894222"
+                             class="m-auto w-full h-auto" alt="Icona" width="80" height="80">
+                    </div>
+                    <div class="font-semibold text-secondary-700 mb-2">La migliore selezione di vini</div>
+                    <div class="text-gray-700 text-sm">Nel nostro assortimento di oltre 10.000 prodotti tra Vini, Champagne e Spirits accuratamente selezionati, troverai sempre la bottiglia giusta per ogni occasione!</div>
+                </div>
+            </div>
+        </div>
+
     </section>
 
     <!-- Presentazione -->

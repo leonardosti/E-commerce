@@ -20,12 +20,11 @@ $config = require __DIR__ . '/../../../../Config/config.php';
             <div class="col-md-6 col-6">
                 <a class="navbar-brand" href="i#"><h3>Vinum Novum</h3></a>
             </div>
-
             <!-- Utente e Carrello -->
             <div class="col-md-6 col-6 text-end">
                 <div class="header-icons">
-                    <a href="#" class="me-3"><i class="fas fa-user"></i></a>
-                    <a href="#" class="position-relative">
+                    <a href="index.php?url=utente/login" class="me-3"><i class="fas fa-user"></i></a>
+                    <a href="index.php?url=carrello/index"" class="position-relative">
                         <i class="fas fa-shopping-cart"></i>
                         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-burgundy">0</span>
                     </a>
@@ -43,8 +42,19 @@ $config = require __DIR__ . '/../../../../Config/config.php';
         </button>
         <div class="collapse navbar-collapse" id="navbarMain">
             <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Cantina
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="">Rossi</a></li>
+                        <li><a class="dropdown-item" href="">Bianchi</a></li>
+                        <li><a class="dropdown-item" href="">Champagne</a></li>
+                        <li><a class="dropdown-item" href="">Spumanti</a></li>
+                    </ul>
+                </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Cantina</a>
+                    <a class="nav-link" href="#">Tutti i Vini</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Bundle</a>
